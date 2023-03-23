@@ -1,16 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("#task-form");
-  form.addEventListener("submit", addTask);
-});
-const form = document.querySelector('#task-form');
-    const taskInput = document.querySelector('#task-input');
-    const taskList = document.querySelector('#task-list');
-
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const taskText = taskInput.value;
-      const taskItem = document.createElement('li');
-      taskItem.textContent = taskText;
-      taskList.appendChild(taskItem);
-      taskInput.value = '';
-    });
+    const form = document.querySelector("#create-task-form");
+    form.addEventListener("submit", addTask);
+  });
+  
+  function addTask(event) {
+    event.preventDefault();
+    
+    const inputField = document.querySelector("#new-task-description");
+    const task = inputField.value;
+    const taskList = document.querySelector("#tasks");
+    const taskItem = document.createElement("li");
+    taskItem.textContent = task;
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    taskItem.appendChild(deleteButton);
+    taskList.appendChild(taskItem);
+    deleteButton.addEventListener("click", () => {
+    taskList.removeChild(taskItem);
+      });
+    event.target.reset();
+  }
